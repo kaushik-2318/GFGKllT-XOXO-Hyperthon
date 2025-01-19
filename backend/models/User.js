@@ -1,19 +1,29 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    username: {
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    aadharId: {
         type: String,
         required: true,
         unique: true,
         trim: true
     },
-    password: {
-        type: String,
-        required: true
-    },
-    isAdmin: {
+    hasVoted: {
         type: Boolean,
-        default: false
+        default: false,
+    },
+    votedParty: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Party',
+        default: null,
     },
 }, { timestamps: true });
 

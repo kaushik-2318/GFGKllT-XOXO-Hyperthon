@@ -6,6 +6,10 @@ exports.registerUser = async (req, res) => {
     try {
         const { email, password, aadharId} = req.body;
 
+        if(!email || !password || !aadharId) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+
         const existingUser = await User.findOne({ aadharId });
         if (existingUser) return res.status(400).json({ message: 'User already exists' });
         
