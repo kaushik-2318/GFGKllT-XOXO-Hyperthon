@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import './SignupPage.css'; // Add this CSS file for styling
+import axios from 'axios';
+import './SignupPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const SignupPage = () => {
   const [email, setEmail] = useState('');
@@ -8,7 +10,7 @@ const SignupPage = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!email || !password || !aadhar) {
@@ -24,7 +26,31 @@ const SignupPage = () => {
     }
 
     setError('');
-    setSuccess('Signup successful!');
+    setSuccess('');
+    
+    try {
+      const response = await axios.post('http://localhost:5000/auth/register', {
+        email,
+        password,
+        aadharId: aadhar,
+      });
+
+      setSuccess(response.data.message);
+      setEmail('');
+      setPassword('');
+      setAadhar('');
+     
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000); 
+
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message || 'Something went wrong');
+      } else {
+        setError('Failed to connect to the server. Please try again later.');
+      }
+    }
   };
 
   return (

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Import Axios for making HTTP requests
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import './LoginPage.css'; // Add this CSS file for styling
 
 const LoginPage = () => {
@@ -6,8 +8,9 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate(); // Initialize the navigate function
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -16,12 +19,26 @@ const LoginPage = () => {
       return;
     }
 
-    // Mock login validation
-    if (email === 'user@example.com' && password === 'password123') {
+    try {
+      const response = await axios.post('http://localhost:5000/auth/login', {
+        email,
+        password,
+      });
+
       setError('');
-      setSuccess('Login successful!');
-    } else {
-      setError('Invalid email or password');
+      setSuccess(response.data.message); // Assuming backend sends a success message
+      
+      localStorage.setItem('authToken', response.data.token);
+      navigate('/'); // This will navigate to the homepage
+
+    } catch (error) {
+      if (error.response) {
+        // Handle error if the response is from the server
+        setError(error.response.data.message || 'Something went wrong');
+      } else {
+        // Handle network or server errors
+        setError('Failed to connect to the server. Please try again later.');
+      }
       setSuccess('');
     }
   };
@@ -40,6 +57,7 @@ const LoginPage = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
+            required
           />
         </div>
         <div className="form-group">
@@ -50,6 +68,7 @@ const LoginPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
+            required
           />
         </div>
         <button type="submit" className="login-button">Login</button>
