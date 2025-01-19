@@ -1,0 +1,35 @@
+├── frontend/
+│   ├── public/                    # Static assets (favicon, index.html)
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Admin/
+│   │   │   │   ├── AddParty.js    # Form for adding new parties
+│   │   │   │   ├── ManageParties.js # Table for managing parties and participation
+│   │   │   │   └── ViewResults.js # Display total and individual party votes
+│   │   │   ├── Voting/
+│   │   │   │   ├── VotingPage.js  # Voting interface for users
+│   │   │   └── Navbar.js          # Navigation bar component
+│   │   ├── pages/
+│   │   │   ├── AdminDashboard.js  # Main dashboard for admin users
+│   │   │   ├── Login.js           # Login page for users
+│   │   │   └── Register.js        # Registration page for users
+│   │   ├── context/
+│   │   │   └── AuthContext.js     # Authentication context for state management
+│   │   ├── hooks/
+│   │   │   └── useAuth.js         # Custom hook for authentication
+│   │   ├── App.js                 # Root React component
+│   │   ├── index.js               # React entry point
+│   │   ├── api/
+│   │   │   ├── adminApi.js        # API calls for admin operations
+│   │   │   ├── authApi.js         # API calls for authentication
+│   │   │   └── voteApi.js         # API calls for voting operations
+│   │   ├── styles/
+│   │   │   └── main.css           # Global CSS styles
+│   │   └── utils/
+│   │       ├── axiosConfig.js     # Axios instance with base URL and headers
+│   │       └── helpers.js         # Utility functions (e.g., formatting)
+│   ├── package.json               # Frontend dependencies and scripts
+│   └── vite.config.js             # Vite configuration for frontend
+├── .env                           # Environment variables for backend/frontend
+├── .gitignore                     # Git ignore file
+└── README.md                      

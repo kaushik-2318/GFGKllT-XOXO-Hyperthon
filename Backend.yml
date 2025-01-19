@@ -1,0 +1,25 @@
+├── backend/
+│   ├── controllers/
+│   │   ├── adminController.js     # Handles admin-specific operations
+│   │   ├── voteController.js      # Handles voting operations
+│   │   └── authController.js      # Handles user authentication (login/signup)
+│   ├── middleware/
+│   │   ├── adminMiddleware.js     # Middleware to protect admin routes
+│   │   ├── authMiddleware.js      # Middleware to protect authenticated routes
+│   │   └── errorMiddleware.js     # Global error handling middleware (optional)
+│   ├── models/
+│   │   ├── User.js                # User model (includes admin flag)
+│   │   ├── Party.js               # Party model (tracks parties and participation status)
+│   │   └── Vote.js                # Vote model (tracks votes and associated parties)
+│   ├── routes/
+│   │   ├── adminRoutes.js         # Routes for admin operations
+│   │   ├── voteRoutes.js          # Routes for voting operations
+│   │   └── authRoutes.js          # Routes for user authentication
+│   ├── config/
+│   │   ├── db.js                  # MongoDB connection configuration
+│   │   └── dotenv.js              # Environment variables configuration (optional)
+│   ├── utils/
+│   │   ├── generateToken.js       # Helper to generate JWT tokens
+│   │   └── logger.js              # Optional logger for debugging
+│   ├── server.js                  # Main server file
+│   └── package.json               
