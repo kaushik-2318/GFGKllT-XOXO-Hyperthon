@@ -20,54 +20,52 @@ function CandidateHomepage() {
   const handleVote = () => {
     if (selectedParty) {
       setVoteCasted(true);
-      alert('You have successfully voted for ${ selectedParty.name }');
+      alert(`You have successfully voted for ${selectedParty.name}`);
     } else {
       alert('Please select a party before casting your vote.');
     }
   };
 
   return (
-    <>
-      <div className="homepage">
-        <header className="header">
-          <h1>E-Voting System</h1>
-          <p>Welcome to the Candidate Voting Page</p>
-        </header>
+    <div className="homepage">
+      <header className="header">
+        <h1>E-Voting System</h1>
+        <p>Welcome to the Candidate Voting Page</p>
+      </header>
 
-        <main className="main-content">
-          {!voteCasted ? (
-            <>
-              <h2>Select a Party to Vote</h2>
-              <ul className="party-list">
-                {parties.map((party) => (
-                  <li
-                    key={party.id}
-                    className={`party - item ${selectedParty?.id === party.id ? 'selected' : ''}`}
-                onClick={() => setSelectedParty(party)}
+      <main className="main-content">
+        {!voteCasted ? (
+          <>
+            <h2>Select a Party to Vote</h2>
+            <ul className="party-list">
+              {parties.map((party) => (
+                <li
+                  key={party.id}
+                  className={`party-item ${selectedParty?.id === party.id ? 'selected' : ''}`}
+                  onClick={() => setSelectedParty(party)}
                 >
-                <div className="party-info">
-                  <span className="party-name-card">{party.name}</span>
-                </div>
-              </li>
+                  <div className="party-info">
+                    <span className="party-name-card">{party.name}</span>
+                  </div>
+                </li>
               ))}
             </ul>
-          <button className="vote-button" onClick={handleVote}>
-            Cast Your Vote
-          </button>
-        </>
+            <button className="vote-button" onClick={handleVote}>
+              Cast Your Vote
+            </button>
+          </>
         ) : (
-        <div className="thank-you-message">
-          <h2>Thank you for voting!</h2>
-          <p>Your vote has been successfully recorded.</p>
-        </div>
+          <div className="thank-you-message">
+            <h2>Thank you for voting!</h2>
+            <p>Your vote has been successfully recorded.</p>
+          </div>
         )}
       </main>
 
       <footer className="footer">
         <p>&copy; 2025 E-Voting System. All rights reserved.</p>
       </footer>
-    </div >
-            </>
+    </div>
   );
 }
 
